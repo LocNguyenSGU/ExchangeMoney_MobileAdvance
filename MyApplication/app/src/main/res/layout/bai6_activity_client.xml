@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- EditText để người dùng nhập tin nhắn -->
+    <EditText
+        android:id="@+id/etMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập tin nhắn"
+        android:inputType="text" />
+
+    <!-- Button để gửi tin nhắn -->
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gửi" />
+
+    <!-- TextView để hiển thị tin nhắn đã nhận từ Server -->
+    <TextView
+        android:id="@+id/tvReceivedMessages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nhận tin nhắn từ Server:"
+        android:textSize="18sp" />
+
+    <!-- ScrollView để hiển thị tin nhắn trong một danh sách cuộn -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/tvMessages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="16sp" />
+    </ScrollView>
+</LinearLayout>

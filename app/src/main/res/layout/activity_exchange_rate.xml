@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:padding="16dp">
+
+    <!-- Tiêu đề -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tỷ giá tiền tệ hôm nay"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:gravity="center"
+        android:layout_marginBottom="30dp" />
+
+    <!-- LinearLayout cho Spinner và Nút Biểu đồ (horizontal orientation) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <!-- Spinner chọn tiền tệ ban đầu -->
+        <Spinner
+            android:id="@+id/spinnerFromCurrency"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:background="@drawable/spiner_boder"/>
+
+        <!-- Nút Biểu đồ -->
+        <Button
+            android:id="@+id/btnChart"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="Biểu đồ"
+            android:textColor="#FFFFFF"
+            android:background="#FF9800"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:layout_marginStart="16dp"/> <!-- Thêm khoảng cách giữa Spinner và nút Biểu đồ -->
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center" />
+
+    </LinearLayout>
+
+    <!-- ListView hiện danh sách tỷ giá -->
+    <ListView
+        android:id="@+id/listViewRates"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="30dp"
+        android:padding="8dp"
+        android:background="#ffffff">
+
+        <Button
+            android:id="@+id/btnConvert"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Đổi tiền"
+            android:textColor="#FFFFFF"
+            android:background="#3F51B5"
+            android:layout_marginEnd="8dp"
+            android:padding="12dp"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/btnHistory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Lịch sử"
+            android:textColor="#FFFFFF"
+            android:background="#4CAF50"
+            android:layout_marginEnd="8dp"
+            android:padding="12dp"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/btnExchangeRate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tỷ giá"
+            android:textColor="#FFFFFF"
+            android:background="#FF9800"
+            android:padding="12dp"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="24dp"
+    android:background="#FFFFFF">
+
+    <!-- Nội dung phía trên, dùng LinearLayout bọc -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        tools:ignore="MissingClass">
+
+        <!-- Tiêu đề -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chuyển đổi tiền tệ"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginBottom="30dp" />
+
+        <!-- EditText nhập số tiền -->
+        <EditText
+            android:id="@+id/editTextAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập số tiền"
+            android:inputType="numberDecimal"
+            android:textSize="16sp"
+            android:padding="12dp"
+            android:layout_marginBottom="20dp" />
+
+
+        <!-- LinearLayout chứa Spinner đầu tiên, mũi tên, và Spinner thứ hai -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="16dp">
+
+            <!-- Spinner chọn tiền tệ ban đầu -->
+            <Spinner
+                android:id="@+id/spinnerFromCurrency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/spiner_boder"/>
+
+            <!-- Mũi tên chỉ xuống -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="→"
+                android:textSize="24sp"
+                android:textColor="#888888" />
+
+            <!-- Spinner chọn tiền tệ muốn chuyển đổi -->
+            <Spinner
+                android:id="@+id/spinnerToCurrency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/spiner_boder"/>
+        </LinearLayout>
+
+        <!-- Nút Chuyển đổi -->
+        <Button
+            android:id="@+id/buttonConvert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chuyển đổi"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            android:background="#3F51B5"
+            android:layout_marginBottom="30dp"
+            android:padding="12dp" />
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:scrollbars="none">
+
+            <TextView
+                android:id="@+id/textViewResult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#333333"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:padding="16dp"
+                android:background="#EEEEEE"
+                android:singleLine="true"
+            android:ellipsize="none"
+            android:scrollHorizontally="true"/>
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+    <!-- 3 Button cố định dưới màn hình -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="30dp">
+
+        <Button
+            android:id="@+id/btnConvert"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Đổi tiền"
+            android:textColor="#FFFFFF"
+            android:background="#3F51B5"
+            android:layout_marginEnd="8dp"
+            android:padding="12dp" />
+
+        <Button
+            android:id="@+id/btnHistory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Lịch sử"
+            android:textColor="#FFFFFF"
+            android:background="#4CAF50"
+            android:layout_marginEnd="8dp"
+            android:padding="12dp" />
+
+        <Button
+            android:id="@+id/btnExchangeRate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tỷ giá"
+            android:textColor="#FFFFFF"
+            android:background="#FF9800"
+            android:padding="12dp" />
+    </LinearLayout>
+
+</LinearLayout>
