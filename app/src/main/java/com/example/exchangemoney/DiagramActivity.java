@@ -173,6 +173,12 @@ public class DiagramActivity extends AppCompatActivity {
 
         progressBar.setVisibility(View.VISIBLE);
 
+        // Trước khi tải lại dữ liệu mới, cần reset lại trạng thái UI
+        runOnUiThread(() -> {
+            findViewById(R.id.lineChart).setVisibility(View.VISIBLE);  // Hiển thị lại biểu đồ
+            findViewById(R.id.noDataLayout).setVisibility(View.GONE);  // Ẩn thông báo không có dữ liệu
+        });
+
         new Thread(() -> {
             try {
                 // Tạo URL cho API
