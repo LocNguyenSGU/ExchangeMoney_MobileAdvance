@@ -32,6 +32,10 @@
         <activity android:name=".ExchangeRateActivity">
             <!-- Nếu cần có intent-filter cho activity này -->
         </activity>
+
+        <activity android:name=".DiagramActivity">
+            <!-- Nếu cần có intent-filter cho activity này -->
+        </activity>
     </application>
 
 </manifest>

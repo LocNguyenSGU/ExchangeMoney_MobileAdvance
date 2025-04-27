@@ -110,7 +110,7 @@
 
     </LinearLayout>
 
-    <!-- 3 Button cố định dưới màn hình -->
+    <!-- 4 Button cố định dưới màn hình -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -146,6 +146,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Tỷ giá"
+            android:textColor="#FFFFFF"
+            android:background="#FF9800"
+            android:layout_marginEnd="8dp"
+            android:padding="12dp" />
+
+        <Button
+            android:id="@+id/btnDiagram"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Biểu đồ"
             android:textColor="#FFFFFF"
             android:background="#FF9800"
             android:padding="12dp" />

@@ -33,7 +33,7 @@ public class ExchangeRateActivity extends AppCompatActivity {
     private ListView listViewRates;
     private CurrencyService currencyService;
     private ArrayAdapter<String> listAdapter;
-    private Button btnConvert , btnHistory ;
+    private Button btnConvert , btnHistory, btnDiagram;
     private ProgressBar progressBar;
 
 
@@ -45,8 +45,6 @@ public class ExchangeRateActivity extends AppCompatActivity {
 
 
         btnConvert =  findViewById(R.id.btnConvert);
-
-
         // Thiết lập sự kiện khi nhấn vào btnConvert
         btnConvert.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +64,16 @@ public class ExchangeRateActivity extends AppCompatActivity {
                 resultIntent.putExtra("result_code", 100); // 123 là con số bạn muốn gửi về
                 setResult(RESULT_OK, resultIntent);
                 finish();
+            }
+        });
+
+        btnDiagram = findViewById(R.id.btnDiagram);
+        btnDiagram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Chuyển sang HistoryConvertActivity khi nhấn nút History
+                Intent intent = new Intent(ExchangeRateActivity.this, DiagramActivity.class);
+                startActivityForResult(intent , 200);
             }
         });
 

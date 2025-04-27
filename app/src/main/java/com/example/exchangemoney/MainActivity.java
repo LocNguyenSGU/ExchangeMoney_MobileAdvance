@@ -19,14 +19,15 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     private CurrencyService currencyService;
+    private CurrencyConverter currencyConverter;
     private Spinner spinnerFromCurrency, spinnerToCurrency;
 
-    private Button buttonConvert , btnConvert , btnHistory , btnRate;
+    private Button buttonConvert , btnConvert , btnHistory , btnRate, btnDiagram;
     private TextView textViewResult;
 
     private  EditText editTextAmount;
 
-    private CurrencyConverter currencyConverter;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         btnConvert = findViewById(R.id.btnConvert);
         btnHistory = findViewById(R.id.btnHistory);
         btnRate = findViewById(R.id.btnExchangeRate);
+        btnDiagram = findViewById(R.id.btnDiagram);
 
         // Liên kết các thành phần UI
         spinnerFromCurrency = findViewById(R.id.spinnerFromCurrency);
@@ -68,6 +70,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Chuyển sang HistoryConvertActivity khi nhấn nút History
                 Intent intent = new Intent(MainActivity.this, ExchangeRateActivity.class);
+                startActivityForResult(intent , 200);
+            }
+        });
+
+        btnDiagram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Chuyển sang HistoryConvertActivity khi nhấn nút History
+                Intent intent = new Intent(MainActivity.this, DiagramActivity.class);
                 startActivityForResult(intent , 200);
             }
         });
