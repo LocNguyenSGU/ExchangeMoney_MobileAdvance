@@ -102,15 +102,5 @@ public class HistoryConvertActivity extends AppCompatActivity {
             }
         });
 
-        Button btnDiagram = findViewById(R.id.btnDiagram);
-        btnDiagram.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Chuyển sang HistoryConvertActivity khi nhấn nút History
-                Intent intent = new Intent(HistoryConvertActivity.this, DiagramActivity.class);
-                startActivityForResult(intent , 200);
-            }
-        });
-
     }
 }
