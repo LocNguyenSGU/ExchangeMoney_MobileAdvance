@@ -27,28 +27,29 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
+            android:layout_height="71dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
 
-            <Spinner
+            <AutoCompleteTextView
                 android:id="@+id/spinnerFromCurrency"
                 android:layout_width="0dp"
-                android:layout_height="45dp"
+                android:layout_height="70dp"
+                android:layout_marginEnd="12dp"
                 android:layout_weight="3"
-                android:background="@drawable/spiner_boder"
-                android:layout_marginEnd="8dp"/>
+                android:background="@drawable/spiner_boder_1"
+                android:hint="Nhập mã hoặc tên tiền tệ" />
 
             <Button
                 android:id="@+id/btnShowChart"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="Biểu đồ"
-                android:textColor="#FFFFFF"
                 android:background="@drawable/button_boder"
                 android:padding="12dp"
-                android:textSize="14sp"/>
+                android:text="Biểu đồ"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <ProgressBar

@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -40,7 +43,7 @@ import java.util.Objects;
 
 public class ExchangeRateActivity extends AppCompatActivity {
 
-    private Spinner currencyFrom ;
+    private AutoCompleteTextView currencyFrom ;
     private ListView listViewRates;
     private CurrencyService currencyService;
     private ArrayAdapter<String> listAdapter;
@@ -95,21 +98,38 @@ public class ExchangeRateActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
 
         currencyService = new CurrencyService(this);
-        currencyService.setupCurrencySpinners(currencyFrom, null); // chỉ setup spinner from
+        currencyService.setupCurrencySpinners(currencyFrom, currencyFrom); // chỉ setup spinner from
 
         listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, latestRatesList);
         listViewRates.setAdapter(listAdapter);
 
-        currencyFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//        currencyFrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                String selectedCurrency = currencyFrom.getText().toString().split(" - ")[0];
+//                loadExchangeRates(selectedCurrency);
+//            }
+//        });
+
+        currencyFrom.setThreshold(0);  // Đặt ngưỡng cho phép tìm kiếm (0 nghĩa là tìm kiếm ngay lập tức)
+        currencyFrom.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedCurrency = parent.getSelectedItem().toString().split(" - ")[0];
-                loadExchangeRates(selectedCurrency);
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                if (charSequence.length() == 0) {  // Khi không có văn bản nào
+                    currencyFrom.showDropDown(); // Mở danh sách tự động
+                }
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
+            public void afterTextChanged(Editable editable) {
+                String selectedCurrency = editable.toString().split("-")[0];
+                loadExchangeRates(selectedCurrency);
+            }
         });
+
 
         lineChart = findViewById(R.id.lineChart);
         btnShowChart = findViewById(R.id.btnShowChart);
@@ -134,7 +154,7 @@ public class ExchangeRateActivity extends AppCompatActivity {
         isLoading = true;
         new Thread(() -> {
             try {
-                String urlString = "https://v6.exchangerate-api.com/v6/70850be6085375c0622897c1/latest/" + fromCurrency;
+                String urlString = "https://v6.exchangerate-api.com/v6/cca8e572cd03d97fd28a7413/latest/" + fromCurrency;
                 URL url = new URL(urlString);
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -289,13 +309,13 @@ public class ExchangeRateActivity extends AppCompatActivity {
             @Override
             public void run() {
                 while (running) {
-                    if(currencyFrom.getSelectedItem() != null){
-                        String selectedCurrency = currencyFrom.getSelectedItem().toString().split(" - ")[0];
+                    if(currencyFrom.getText() != null){
+                        String selectedCurrency = currencyFrom.getText().toString().split(" - ")[0];
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 // --> Code thay đổi giao diện nằm ở đây
-                                loadExchangeRates(selectedCurrency);
+//                                loadExchangeRates(selectedCurrency);
                             }
                         });
                     }

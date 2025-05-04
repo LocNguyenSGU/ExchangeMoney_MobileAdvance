@@ -29,7 +29,7 @@ public class CurrencyConverter {
     }
 
     public void convertCurrency(String fromCurrency, String toCurrency, double amount, final CurrencyConversionCallback callback) {
-        String url = "https://v6.exchangerate-api.com/v6/70850be6085375c0622897c1/latest/" + fromCurrency;
+        String url = "https://v6.exchangerate-api.com/v6/cca8e572cd03d97fd28a7413/latest/" + fromCurrency;
 
         Request request = new Request.Builder()
                 .url(url)

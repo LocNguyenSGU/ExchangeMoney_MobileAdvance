@@ -43,36 +43,41 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:gravity="center_horizontal"
             android:layout_marginBottom="16dp">
 
-            <!-- Spinner chọn tiền tệ ban đầu -->
-            <Spinner
+            <!-- AutoCompleteView chọn tiền tệ ban đầu -->
+            <AutoCompleteTextView
                 android:id="@+id/spinnerFromCurrency"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/spiner_boder"/>
+                android:layout_marginBottom="8dp"
+                android:hint="Nhập mã hoặc tên tiền tệ"
+                android:background="@drawable/spiner_boder" />
 
-            <!-- Mũi tên chỉ xuống -->
-            <TextView
+            <!-- Nút hoán đổi -->
+            <Button
+                android:id="@+id/swapCurrency"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="→"
-                android:textSize="24sp"
-                android:textColor="#888888" />
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="🔄"
+                android:textColor="#888888"
+                android:textSize="30sp" />
 
-            <!-- Spinner chọn tiền tệ muốn chuyển đổi -->
-            <Spinner
+            <!-- AutoCompleteView chọn tiền tệ muốn chuyển -->
+            <AutoCompleteTextView
                 android:id="@+id/spinnerToCurrency"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/spiner_boder"/>
+                android:layout_marginTop="8dp"
+                android:hint="Nhập mã hoặc tên tiền tệ"
+                android:background="@drawable/spiner_boder" />
         </LinearLayout>
+
 
         <!-- Nút Chuyển đổi -->
         <Button

@@ -3,7 +3,11 @@ package com.example.exchangemoney;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -30,8 +34,8 @@ public class CurrencyService {
     private final OkHttpClient client;
     private final Context context;
     private final Handler mainHandler;
-    private final String apiKey = "70850be6085375c0622897c1"; // API Key của bạn
-    private final String url = "https://v6.exchangerate-api.com/v6/" + apiKey + "/latest/USD";
+    private final String apiKey = "cca8e572cd03d97fd28a7413"; // API Key của bạn
+    private final String url = "https://v6.exchangerate-api.com/v6/cca8e572cd03d97fd28a7413/latest/USD";
 
     public CurrencyService(Context context) {
         this.context = context;
@@ -40,7 +44,7 @@ public class CurrencyService {
     }
 
     // Phương thức để tự động fetch dữ liệu và setup cho cả 2 spinner
-    public void setupCurrencySpinners(Spinner spinnerFromCurrency, Spinner spinnerToCurrency) {
+    public void setupCurrencySpinners(AutoCompleteTextView autoCompleteFrom, AutoCompleteTextView autoCompleteTo) {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
@@ -77,16 +81,47 @@ public class CurrencyService {
                         currencyModelList.add(new CurrencyModel(code, displayName));
                     }
 
+                    // Mở danh sách tự động khi không có nội dung nhập
+                    autoCompleteFrom.setThreshold(0);  // Đặt ngưỡng cho phép tìm kiếm (0 nghĩa là tìm kiếm ngay lập tức)
+                    autoCompleteFrom.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {}
+
+                        @Override
+                        public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                            if (charSequence.length() == 0) {  // Khi không có văn bản nào
+                                autoCompleteFrom.showDropDown(); // Mở danh sách tự động
+                            }
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable editable) {}
+                    });
+
+                    autoCompleteTo.setThreshold(0);  // Đặt ngưỡng cho phép tìm kiếm (0 nghĩa là tìm kiếm ngay lập tức)
+                    autoCompleteTo.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {}
+
+                        @Override
+                        public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                            if (charSequence.length() == 0) {  // Khi không có văn bản nào
+                                autoCompleteTo.showDropDown(); // Mở danh sách tự động
+                            }
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable editable) {}
+                    });
+
                     // Sắp xếp theo mã tiền tệ
                     Collections.sort(currencyModelList, (c1, c2) -> c1.getCode().compareTo(c2.getCode()));
 
                     // Update giao diện trên main thread
                     mainHandler.post(() -> {
                         CustomAdapter adapter = new CustomAdapter(context, currencyModelList);
-                        spinnerFromCurrency.setAdapter(adapter);
-                        if (spinnerToCurrency != null) {
-                            spinnerToCurrency.setAdapter(adapter);
-                        }
+                        autoCompleteFrom.setAdapter(adapter);
+                        autoCompleteTo.setAdapter(adapter);
                     });
 
                 } catch (Exception e) {

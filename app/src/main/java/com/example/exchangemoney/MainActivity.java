@@ -3,8 +3,11 @@ package com.example.exchangemoney;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.SpannableString;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
@@ -20,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
 
     private CurrencyService currencyService;
     private CurrencyConverter currencyConverter;
-    private Spinner spinnerFromCurrency, spinnerToCurrency;
+    private AutoCompleteTextView autoCompleteTextViewFromCurrency, autoCompleteTextViewToCurrency;
 
-    private Button buttonConvert , btnConvert , btnHistory , btnRate, btnDiagram;
+    private Button buttonConvert , btnConvert , btnHistory , btnRate, btnDiagram , swapCurrency;
     private TextView textViewResult;
 
     private  EditText editTextAmount;
@@ -40,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
         btnRate = findViewById(R.id.btnExchangeRate);
 
         // Liên kết các thành phần UI
-        spinnerFromCurrency = findViewById(R.id.spinnerFromCurrency);
-        spinnerToCurrency = findViewById(R.id.spinnerToCurrency);
+        autoCompleteTextViewFromCurrency = findViewById(R.id.spinnerFromCurrency);
+        autoCompleteTextViewToCurrency = findViewById(R.id.spinnerToCurrency);
         editTextAmount = findViewById(R.id.editTextAmount);
         buttonConvert = findViewById(R.id.buttonConvert);
         textViewResult = findViewById(R.id.textViewResult);
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         currencyService = new CurrencyService(this);
 
-        currencyService.setupCurrencySpinners(spinnerFromCurrency, spinnerToCurrency);
+        currencyService.setupCurrencySpinners(autoCompleteTextViewFromCurrency, autoCompleteTextViewToCurrency);
 
         buttonConvert.setOnClickListener(v -> convertCurrency());
 
@@ -73,18 +76,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        swapCurrency =  findViewById(R.id.swapCurrency);
+        swapCurrency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("ldkfjaldkfjadlkfj;áldfjksjadflkj");
+                String currencyFrom =  autoCompleteTextViewFromCurrency.getText().toString();
+                String currencyTo =  autoCompleteTextViewToCurrency.getText().toString();
+                autoCompleteTextViewFromCurrency.setText(currencyTo);
+                autoCompleteTextViewToCurrency.setText(currencyFrom);
+                convertCurrency();
+            }
+        });
 
     }
 
     private void convertCurrency() {
-        if (spinnerFromCurrency.getAdapter() == null || spinnerToCurrency.getAdapter() == null) {
+        if (autoCompleteTextViewFromCurrency.getAdapter() == null || autoCompleteTextViewToCurrency.getAdapter() == null) {
             Toast.makeText(this, "Danh sách tiền tệ chưa sẵn sàng", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        String fromCurrency = spinnerFromCurrency.getSelectedItem().toString().split(" - ")[0];
-        String toCurrency = spinnerToCurrency.getSelectedItem().toString().split(" - ")[0];
+        String fromCurrency = autoCompleteTextViewFromCurrency.getText().toString().split(" - ")[0];
+        String toCurrency = autoCompleteTextViewToCurrency.getText().toString().split(" - ")[0];
         String amountStr = editTextAmount.getText().toString() ;
 
         if (amountStr.isEmpty()) {
